@@ -47,6 +47,7 @@ public class StructureOnBoard : OnBoard, ITile
             if (!other.Equals(task))
                 continue;
             TaskHUD removedTask = _taskHUDs.Find(t => t.Type.Equals(other));
+            removedTask.Alpha = 0.3f;
             _structure.task.Remove(other);
             _taskHUDs.Remove(removedTask);
             Destroy(removedTask.gameObject);

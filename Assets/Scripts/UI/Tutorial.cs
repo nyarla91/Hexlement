@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Tutorial : Transformer
 {
-    public static bool Watched { get; private set; }
+    public static bool Hidden { get; private set; }
     
     [SerializeField] private CanvasGroup _pageGroup;
     [SerializeField] private Image _illustration;
@@ -16,10 +16,11 @@ public class Tutorial : Transformer
 
     private Coroutine _fadeCoroutine;
     private int _currentPage;
+    private float targetY;
 
     private void Start()
     {
-        if (Watched)
+        if (Hidden)
             Destroy(gameObject);
         StartCoroutine(FadeToNext(0));
     }
@@ -62,20 +63,21 @@ public class Tutorial : Transformer
         _fadeCoroutine = null;
     }
 
-    public void Close() => StartCoroutine(CloseIE());
-
-    private IEnumerator CloseIE()
+    public void Close()
     {
-        Watched = true;
-        const float yPosition = 1500;
-        const float lerpSpeed = 5;
-        
-        while (rectTransform.anchoredPosition.y < yPosition - 1)
-        {
-            rectTransform.anchoredPosition = Vector2.Lerp(rectTransform.anchoredPosition, new Vector2(0, yPosition), lerpSpeed * Time.deltaTime);
-            yield return null;
-        }
-        Destroy(gameObject);
+        Hidden = true;
+        targetY = rectTransform.rect.height * 1.01f;
+    } 
+    public void Show()
+    { 
+        Hidden = false;
+        targetY = 0;
+    } 
+
+    private void Update()
+    {
+        rectTransform.anchoredPosition =
+            Vector2.Lerp(rectTransform.anchoredPosition, new Vector2(0, targetY), 10 * Time.deltaTime);
     }
 }
 

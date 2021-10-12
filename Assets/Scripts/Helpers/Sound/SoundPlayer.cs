@@ -19,7 +19,7 @@ public class SoundPlayer : MonoBehaviour
     public static void Play(AudioClip audioClip, float volume)
     {
         SoundInstance newInstance =
-            Instantiate(_instance._soundPrefab, CameraProperties2D.Transform.position, Quaternion.identity)
+            Instantiate(_instance._soundPrefab, CameraProperties.instance.transform.position, Quaternion.identity)
                 .GetComponent<SoundInstance>();
         newInstance.Play(audioClip, volume * MASTER_VOLUME);
     }

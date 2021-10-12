@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Hex : MonoBehaviour
@@ -37,14 +38,14 @@ public class Hex : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (active)
+        if (active && Tutorial.Hidden)
         {
             Resources.TilesInDeck--;
             SoundPlayer.Play(_placementSound, 1);
             GameObject prefab = Turns.NextStructure.type == StructureType.Tower ? _towerPrefab : _structurePrefab;
             ITile newTile = Instantiate(prefab, transform.position, Quaternion.identity).GetComponent<ITile>();
             newTile.Place(Turns.NextStructure);
-            Instantiate(_placementParticles, VectorHelper.SetZ(transform.position, -5), Quaternion.identity);
+            Instantiate(_placementParticles, VectorHelper.SetZ(transform.position, -0.5f), Quaternion.identity);
             Destroy(gameObject);
         }
     }

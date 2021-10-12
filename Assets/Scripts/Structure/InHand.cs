@@ -18,7 +18,6 @@ public class InHand : Transformer
     protected virtual void Start()
     {
         tiles.Add(this);
-        Controls.Map.All.Cancel.performed += Cancel;
         _selected.OnChanged += OnSelectedChanged;
     }
 

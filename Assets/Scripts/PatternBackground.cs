@@ -9,7 +9,7 @@ public class PatternBackground : MonoBehaviour
 
     private void Update()
     {
-        Vector2 cameraPosition = CameraProperties2D.Transform.position;
+        Vector2 cameraPosition = CameraProperties.instance.transform.position;
         float x = (int) cameraPosition.x;
         float y = (int) cameraPosition.y;
         transform.position = new Vector3(x, y, 10);

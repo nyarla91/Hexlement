@@ -29,12 +29,18 @@ public class StructureInHand : InHand
         NewTurn(false);
     }
 
+    private IEnumerator SelectAgain()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (Resources.TilesInDeck > 0)
+            Click();
+    }
+
     public void NewTurn(bool tower)
     {
         _selected.V = false;
-        if (tower) 
-            return;
         Structure = new Structure(false);
         rectTransform.anchoredPosition = new Vector2(rectTransform.anchoredPosition.x, Y_UPON_REROLLED);
+        StartCoroutine(SelectAgain());
     }
 }

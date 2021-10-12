@@ -1,13 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class CameraProperties
+[RequireComponent(typeof(Camera))]
+public class CameraProperties : Transformer
 {
+    public static CameraProperties instance;
     private static Camera _main;
-    public static Camera Main => _main ?? (_main = Camera.main);
+    public static Camera Main => _main ?? (_main = instance.GetComponent<Camera>());
     
-    private static Transform _transform;
-    public static Transform Transform => _transform ?? (_transform = Main.transform);
-    public static float RotationOffset => Transform.rotation.eulerAngles.y;
+    public static Vector3 MousePosition2D => Main.ScreenToWorldPoint(Input.mousePosition);
+
+    public static Vector3 PercentToScreenPoint(Vector2 percent)
+    {
+        percent += Vector2.one;
+        percent /= 2;
+        return new Vector2(Screen.width, Screen.height);
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
 }

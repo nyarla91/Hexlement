@@ -43,8 +43,6 @@ public class CursorControl : MonoBehaviour
     {
         if (Camera)
             SetCursorFromInfo(_instance._cameraCursor);
-        else if (Placement)
-            SetCursorFromInfo(_instance._placementCursor);
         else
             SetCursorFromInfo(_instance._regularCursor);
     }

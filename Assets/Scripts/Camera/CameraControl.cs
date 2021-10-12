@@ -25,7 +25,7 @@ public class CameraControl : Transformer
 
     private void Update()
     {
-        float size = CameraProperties2D.Main.orthographicSize;
+        float size = CameraProperties.Main.orthographicSize;
         Vector3 deltaPosition = Vector3.zero;
         // Drag
         if (_drag)
@@ -36,7 +36,7 @@ public class CameraControl : Transformer
         transform.position += (Vector3) deltaPosition;
         // Zoom
         float zoom = -Controls.Map.All.Zoom.ReadValue<float>();
-        CameraProperties2D.Main.orthographicSize = Mathf.Clamp(size + zoom * ZOOM_SPEED, 1, 7);
+        CameraProperties.Main.orthographicSize = Mathf.Clamp(size + zoom * ZOOM_SPEED, 1, 7);
         // Return
         if (deltaPosition.magnitude == 0 && !_drag && _idle == null)
         {

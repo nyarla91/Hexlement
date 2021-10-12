@@ -46,7 +46,7 @@ public class Turns : MonoBehaviour
     private IEnumerator CheckDefeat()
     {
         yield return new WaitForSeconds(0.1f);
-        if (Resources.Coins <= 0 || Resources.TilesInDeck <= 0)
+        if (Resources.TilesInDeck <= 0)
         {
             LoseScreen.Show();
         }

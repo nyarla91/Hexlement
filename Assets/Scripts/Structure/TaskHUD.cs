@@ -20,6 +20,12 @@ public class TaskHUD : Transformer
 
     public Vector2 targetPosition;
 
+    public float Alpha
+    {
+        get => _spriteRenderer.color.a;
+        set => _spriteRenderer.color = VectorHelper.SetA(_spriteRenderer.color, value);
+    }
+
     private void Update()
     {
         transform.position = Vector2.Lerp(transform.position, targetPosition, Time.deltaTime * 5);
